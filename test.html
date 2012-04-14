@@ -1,0 +1,45 @@
+<html>
+<head>
+	<script type="text/javascript" src="converser.js"></script>
+
+</head>
+<body>
+	<fieldset>
+		<legend>Register</legend>
+			<form id="registerDevice">
+				API Key <input type="text" id="apikey" value=""></input>
+				User Identity <input type="text" id="ident" value="converser@example.com"></input>
+				Device OS <input type="text" id="os" value="iOS"></input>
+				Device Model <input type="text" id="model" value="A1332"></input>
+			</form>
+				<button id="register">Register</button>
+				<div id="devicekey">Device Not Verified</div>
+			
+	</fieldset>
+	<fieldset>
+		<legend>Feedback</legend>
+			<form id="feedbackform">
+		        Reaction <input type="text" id="reaction" value="4"></input>
+				Area <input type="text" id="area" value="Usability"></input>
+				Text <input type="text" id="text" value="Thanks"></input>
+				<button id="feedback">Send Feedback</button>
+			</form>
+	</fieldset>	
+</body>
+<script type="text/javascript">
+		function verifydevice()
+		{
+			var client = new Client('MYAPI');
+			
+			var userid = document.getElementById('ident').value;
+			var os = document.getElementById('os').value;
+			var model = document.getElementById('model').value;
+			client.registerdevice(userid, os, model, function(data)
+				{
+					document.getElementById('devicekey').innerHTML = data;
+				});
+		}
+
+		document.getElementById('register').onclick = verifydevice;
+	</script>
+</html>
